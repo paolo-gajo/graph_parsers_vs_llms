@@ -1,0 +1,38 @@
+__pycache__
+.env/
+.env/
+.slurm/
+.vscode/
+*.out
+*.safetensors
+**pyc
+# config.json
+# model_info/
+# models/
+chat_templates/
+data/
+data/araieval_arabicnlp24
+data/checkthat24
+data/combined
+data/mt_train_data
+data/pred_documents
+data/xl-wa
+generation_config.json
+logging/
+model.safetensors.index.json
+models/
+notebooks/
+outputs/
+paper/
+results_argo/
+results_sub_1/
+results*
+results/old/
+scripts/
+special_tokens_map.json
+tables/
+tokenizer_config.json
+tokenizer.json
+tokenizer.model
+unsloth_compiled_cache/
+unsloth/
