@@ -8,8 +8,7 @@ The paper compares supervised LLM-based relation extraction against graph-based 
 
 - `./biaffine_attention_parsing` contains the EfficientSDP/biaffine graph parser code.
 - `./llm_parsing` contains the LLM text-to-graph fine-tuning and evaluation code.
-- `./data` contains the shared datasets. This directory is intentionally ignored by git; download it separately from [this drive folder](https://drive.google.com/drive/folders/1vVKJIUzK4hIipfdEGmS0CCoFmUmZwOQV) and place it at the repository root.
-- `./results` contains experiment outputs produced by the training/evaluation scripts.
+- `./data` contains the datasets: CoNLL04, ADE, SciERC, enEWT, SciDTB, and ERFGC. ADE, CoNLL04 and SciERC can be download from [this drive folder](https://drive.google.com/drive/folders/1vVKJIUzK4hIipfdEGmS0CCoFmUmZwOQV). enEWT can be downloaded from [this repo](https://github.com/UniversalDependencies/UD_English-EWT). SciDTB can be downloaded from [this repo](https://github.com/PKU-TANGENT/SciDTB). To obtain ERFGC, contact the authors of [English recipe flow graph corpus](https://aclanthology.org/2020.lrec-1.638/) directly.
 
 ## Data
 
@@ -37,10 +36,16 @@ graph_parsers_vs_llms/
     ├── conll04/
     │   ├── bio/
     │   └── rdf/
-    ├── scierc/
+    ├── enewt/
+    │   ├── bio/
+    │   └── rdf/
+    ├── erfgc/
     │   ├── bio/
     │   └── rdf/
     ├── scidtb/
+    │   ├── bio/
+    │   └── rdf/
+    ├── scierc/
     │   ├── bio/
     │   └── rdf/
     └── ...
