@@ -8,7 +8,6 @@ The paper compares supervised LLM-based relation extraction against graph-based 
 
 - `./biaffine_attention_parsing` contains the EfficientSDP/biaffine graph parser code.
 - `./llm_parsing` contains the LLM text-to-graph fine-tuning and evaluation code.
-- `./CITATION.bib` contains the BibTeX citation for the ACL 2026 paper.
 - `./data` contains the shared datasets. This directory is intentionally ignored by git; download it separately from [this drive folder](https://drive.google.com/drive/folders/1vVKJIUzK4hIipfdEGmS0CCoFmUmZwOQV) and place it at the repository root.
 - `./results` contains experiment outputs produced by the training/evaluation scripts.
 
