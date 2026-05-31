@@ -1,7 +1,8 @@
 custom_config = {
-    'train_file_graphs': './data/{dataset_name}/train.json',
-    'val_file_graphs': './data/{dataset_name}/val.json',
-    'test_file_graphs': './data/{dataset_name}/test.json',
+    'data_dir': '{repo_root}/data',
+    'train_file_graphs': '{data_dir}/{dataset_name}/bio/train.json',
+    'val_file_graphs': '{data_dir}/{dataset_name}/bio/val.json',
+    'test_file_graphs': '{data_dir}/{dataset_name}/bio/test.json',
     'dataset_name': 'scidtb',
     'word_majority_eval': 0,
     'save_model': 1,

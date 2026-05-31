@@ -8,6 +8,9 @@ from tqdm.auto import tqdm
 from datetime import datetime
 from runner import *
 import argparse
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
 def main(args):
     print(f'Testing model: {args.model}')
@@ -25,7 +28,7 @@ def main(args):
     
     tokenizer = AutoTokenizer.from_pretrained(args.model)
 
-    dataset_path = f'./data/{args.dataset}/rdf'
+    dataset_path = REPO_ROOT / 'data' / args.dataset / 'rdf'
     
     train_split = f'{args.train_split}_triples.json'
     train_json = os.path.join(dataset_path, train_split)

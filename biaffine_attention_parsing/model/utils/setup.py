@@ -4,6 +4,9 @@ from model.utils import get_current_time_string, make_dir
 from transformers import AutoConfig, set_seed
 import os
 import warnings
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 def setup_config(config : Dict, args: Dict = {}, custom_config: Dict = {}, mode = 'train') -> Dict:
     for key in custom_config:
@@ -69,9 +72,22 @@ def setup_config(config : Dict, args: Dict = {}, custom_config: Dict = {}, mode 
     config['figures_dir'] = f'./paper/figures_{keep_k_string}'
     make_dir(config['figures_dir'])
 
-    config['train_file_graphs'] = config['train_file_graphs'].format(dataset_name = config['dataset_name'])
-    config['val_file_graphs'] = config['val_file_graphs'].format(dataset_name = config['dataset_name'])
-    config['test_file_graphs'] = config['test_file_graphs'].format(dataset_name = config['dataset_name'])
+    config['data_dir'] = config.get('data_dir', '{repo_root}/data').format(repo_root=REPO_ROOT)
+    config['train_file_graphs'] = config['train_file_graphs'].format(
+        repo_root=REPO_ROOT,
+        data_dir=config['data_dir'],
+        dataset_name=config['dataset_name'],
+    )
+    config['val_file_graphs'] = config['val_file_graphs'].format(
+        repo_root=REPO_ROOT,
+        data_dir=config['data_dir'],
+        dataset_name=config['dataset_name'],
+    )
+    config['test_file_graphs'] = config['test_file_graphs'].format(
+        repo_root=REPO_ROOT,
+        data_dir=config['data_dir'],
+        dataset_name=config['dataset_name'],
+    )
 
     # model path
     config['model_path'] = os.path.join(config['save_dir'], 'model.pth')

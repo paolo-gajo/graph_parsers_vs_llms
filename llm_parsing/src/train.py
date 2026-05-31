@@ -8,6 +8,9 @@ import argparse
 import os
 import yaml
 import pandas as pd
+from pathlib import Path
+
+LLM_ROOT = Path(__file__).resolve().parents[1]
 
 def main(args):
     config = setup_config(args)
@@ -41,9 +44,9 @@ def main(args):
     
     if tokenizer.chat_template is None and hasattr(model.config, 'model_type'):
         if 'Qwen3' in config['model_name']:
-            tokenizer.chat_template = open('./model_info/qwen3.jinja').read()
+            tokenizer.chat_template = open(LLM_ROOT / 'model_info' / 'qwen3.jinja').read()
         else:
-            chat_template_dict = yaml.safe_load(open('./model_info/chat_templates.yaml'))
+            chat_template_dict = yaml.safe_load(open(LLM_ROOT / 'model_info' / 'chat_templates.yaml'))
             tokenizer.chat_template = chat_template_dict.get(model.config.model_type)
         print(f"Chat template not found, using the one for model type \"{model.config.model_type}\"")
 

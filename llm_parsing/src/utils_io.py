@@ -6,6 +6,9 @@ import os
 from typing import Dict, List
 from pathlib import Path
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
+LLM_ROOT = Path(__file__).resolve().parents[1]
+
 def setup_config(namespace: argparse.Namespace, default_cfg: dict = {}):
     args = vars(namespace)
     model_dir = os.path.abspath(args.get('model_name', ''))
@@ -19,7 +22,8 @@ def setup_config(namespace: argparse.Namespace, default_cfg: dict = {}):
             config[k] = v
     if not config['run_id']:
         config['run_id'] = get_current_time_string()
-    config['dataset_path'] = f"./data/{config['dataset']}/rdf"
+    config['data_dir'] = str(REPO_ROOT / 'data')
+    config['dataset_path'] = str(Path(config['data_dir']) / config['dataset'] / 'rdf')
     if args['do_train']:
         if 'lora_config' not in config:
             lora_modules = [el+'_proj' for el in args['lora_modules'].split('-') if el] if args['lora_modules'] != 'ft' else None
@@ -42,14 +46,14 @@ def setup_config(namespace: argparse.Namespace, default_cfg: dict = {}):
         config['results_dir'] = set_save_dir(config['results_dir'], run_id_list, './results')
     config['model_dir'] = os.path.join(config['results_dir'], 'model')
     make_dir(config['model_dir'])
-    model_chat_dict = yaml.safe_load(open('./model_info/model_chat_dict.yaml', 'r'))
+    model_chat_dict = yaml.safe_load(open(LLM_ROOT / 'model_info' / 'model_chat_dict.yaml', 'r'))
     
     if config['desc_schema']:
-        config['relations_path'] = f"./data/{config['dataset']}/rdf/relations.json"
-        config['ent_classes_path'] = f"./data/{config['dataset']}/rdf/ent_classes.json"
+        config['relations_path'] = str(Path(config['dataset_path']) / 'relations.json')
+        config['ent_classes_path'] = str(Path(config['dataset_path']) / 'ent_classes.json')
     else:
-        config['relations_path'] = f"./data/{config['dataset']}/rdf/relations_list.json"
-        config['ent_classes_path'] = f"./data/{config['dataset']}/rdf/ent_classes_list.json"
+        config['relations_path'] = str(Path(config['dataset_path']) / 'relations_list.json')
+        config['ent_classes_path'] = str(Path(config['dataset_path']) / 'ent_classes_list.json')
     
     config['chat'] = model_chat_dict[config['model_name']]
 
@@ -58,7 +62,7 @@ def setup_config(namespace: argparse.Namespace, default_cfg: dict = {}):
     save_json(config, config_path)
     print(f'Config saved to: {config_path}')
 
-    prompt_config_path = os.path.join('prompts', config['prompt_filename'])
+    prompt_config_path = LLM_ROOT / 'prompts' / config['prompt_filename']
     with open(prompt_config_path) as f:
         config['prompt_config'] = yaml.safe_load(f)
 
