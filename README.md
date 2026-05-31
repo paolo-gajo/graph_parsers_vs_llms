@@ -63,7 +63,7 @@ tree -L 3 data
 If you use this repository, please cite:
 
 ```bibtex
-@inproceedings{gajo_2026_llms-underperform,
+@inproceedings{gajo_2026_graphbasedparsersvsllms,
   title = {{LLMs Underperform Graph-Based Parsers on Supervised Relation Extraction for Complex Graphs}},
   author = {Gajo, Paolo and Rosati, Domenic and Sajjad, Hassan and Barr{\'o}n-Cede{\~n}o, Alberto},
   booktitle = {Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics},
